@@ -25,6 +25,7 @@
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#pricing">Pricing</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -66,6 +67,7 @@
       <!-- LARGE -->
       <div class="panel large manga-reveal">
         <img src="images/shinchanhimawari.jpg" alt="Shinchan Demon Slayer">
+        <span class="price-tag">From ₹300</span>
         <div class="overlay">
           <h3>Shinchan × Demon Slayer</h3>
           <p>
@@ -111,6 +113,7 @@
       <!-- LARGE -->
       <div class="panel large manga-reveal">
         <img src="images/sasuke.jpg" alt="Sasuke">
+        <span class="price-tag">From ₹100</span>
         <div class="overlay">
           <h3>Sasuke Uchiha</h3>
           <p>
@@ -122,6 +125,7 @@
       <!-- NORMAL -->
       <div class="panel manga-reveal">
         <img src="images/rengoku.jpg" alt="Rengoku">
+        <span class="price-tag">From ₹500</span>
         <div class="overlay">
           <h5>Rengoku Side View</h5>
           <p>
@@ -144,6 +148,7 @@
       <!-- NORMAL -->
       <div class="panel manga-reveal">
         <img src="images/nezuko.jpg" alt="">
+        <span class="price-tag">From ₹300</span>
         <div class="overlay">
           <h3>Nezuko Kamado</h3>
           <p>
@@ -166,6 +171,7 @@
       <!-- LARGE -->
       <div class="panel manga-reveal">
         <img src="images/zenitsu.jpg" alt="Zenitsu Thunder">
+        <span class="price-tag">From ₹500</span>
         <div class="overlay">
           <h3>Zenitsu Thunder Form</h3>
           <p>
@@ -177,6 +183,7 @@
       <!-- WIDE -->
       <div class="panel tall manga-reveal">
         <img src="images/naruto.jpg" alt="Naruto Ramen">
+        <span class="price-tag">From ₹1200</span>
         <div class="overlay">
           <h3>Naruto Ramen Break</h3>
           <p>
@@ -258,6 +265,76 @@
     </div>
   </section>
 
+  <section id="pricing" class="pricing">
+    <h2>Pricing</h2>
+    <p class="pricing-intro">
+      Transparent starting prices. Final quote depends on size, detail and timeline.
+      Transportation charges are separate based on location.
+    </p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <h3>Anime Sketch</h3>
+        <p class="price-meta">A4 · pencil / ink</p>
+        <p class="price-amount">₹150 <span>onwards</span></p>
+        <ul>
+          <li>Single character</li>
+          <li>Black &amp; white shading / Pastel colours </li>
+          <li>Delivery in 3-5 days</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <h3>Oil Pastel Portrait</h3>
+        <p class="price-meta">A4 · vibrant colour</p>
+        <p class="price-amount">₹500 <span>onwards</span></p>
+        <ul>
+          <li>Anime / character portrait</li>
+          <li>Rich layered colours</li>
+          <li>Delivery in 5-7 days</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <span class="badge">Popular</span>
+        <h3>Acrylic Painting</h3>
+        <p class="price-meta">A4 · canvas / paper</p>
+        <p class="price-amount">₹700 <span>onwards</span></p>
+        <ul>
+          <li>Detailed character art</li>
+          <li>Glossy finish</li>
+          <li>Delivery in 7-10 days</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <h3>Large Acrylic</h3>
+        <p class="price-meta">A3 / canvas board</p>
+        <p class="price-amount">₹1000 <span>onwards</span></p>
+        <ul>
+          <li>Full scene / multi-character</li>
+          <li>Premium finish</li>
+          <li>Delivery in 10-14 days</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <h3>Custom Commission</h3>
+        <p class="price-meta">Any medium / size</p>
+        <p class="price-amount">Quote <span>on request</span></p>
+        <ul>
+          <li>Tell us your vision</li>
+          <li>Reference images welcome</li>
+          <li>Personalised timeline</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <a href="#orders"><button class="btn orange pricing-cta">Request a Quote</button></a>
+  </section>
+
   <section id="orders" class="orders">
 
     <h2>Order Your Artwork</h2>
@@ -271,16 +348,31 @@
       Please mention your artwork requirement from the catalogue while submitting the form.
     </p>
 
-    <form action="https://formsubmit.co/diidlify141@gmail.com" method="POST">
+    <form id="orderForm">
 
       <input type="text" name="name" placeholder="Your Name" required />
 
       <input type="email" name="email" placeholder="Your Email" required />
 
-      <textarea name="requirement" placeholder="Mention your artwork requirement from the catalogue..." rows="6"
+      <input type="tel" name="phone" placeholder="Phone / WhatsApp (optional)" />
+
+      <select name="artwork_type" required>
+        <option value="" disabled selected>Choose artwork type</option>
+        <option>Acrylic Painting</option>
+        <option>Oil Pastel</option>
+        <option>Anime Sketch</option>
+        <option>Custom Commission</option>
+        <option>Other</option>
+      </select>
+
+      <input type="text" name="reference" placeholder="Catalogue reference (e.g. Rengoku Final Stand)" />
+
+      <textarea name="requirement" placeholder="Mention your artwork requirement, size, deadline, budget..." rows="6"
         required></textarea>
 
       <button type="submit">Submit Requirement</button>
+
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 
     </form>
 
@@ -294,10 +386,33 @@
     <h2>Connect With Me</h2>
 
     <div class="socials">
-      <a href="https://www.youtube.com/@Diidlify">YouTube</a>
-      <a href="mailto:diidlify141@gmail.com">Gmail</a>
+      <a href="https://www.youtube.com/@Diidlify" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=diidlify141@gmail.com&su=Artwork%20Enquiry%20-%20Diidlify%20Studio"
+        target="_blank" rel="noopener">Gmail</a>
     </div>
   </section>
+
+  <div class="image-modal" id="imageModal">
+    <span class="close-btn" id="modalClose">&times;</span>
+    <img alt="Preview" id="modalImg" />
+  </div>
+
+  <!-- Ninja cursor -->
+  <div class="ninja-cursor" id="ninjaCursor" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="40" height="40">
+      <defs>
+        <radialGradient id="shurikenGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffb347" />
+          <stop offset="60%" stop-color="#ff8c00" />
+          <stop offset="100%" stop-color="#7a3b00" />
+        </radialGradient>
+      </defs>
+      <polygon points="32,4 38,26 60,32 38,38 32,60 26,38 4,32 26,26" fill="url(#shurikenGlow)" stroke="#fff3e0"
+        stroke-width="1.2" stroke-linejoin="round" />
+      <circle cx="32" cy="32" r="4" fill="#0b0b0b" stroke="#fff3e0" stroke-width="1" />
+    </svg>
+  </div>
+  <div class="ninja-dot" id="ninjaDot" aria-hidden="true"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <script src="script.js"></script>
