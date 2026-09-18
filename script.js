@@ -76,46 +76,59 @@ for(let i = 0; i < 40; i++){ const particle=document.createElement('span'); part
   if (e.key === 'Escape' && imageModal.classList.contains('active')) closeModal();
   });
 
-  /* ---------- Order form: open Gmail compose with prefilled details ---------- */
+  /* ---------- Order form: submit responses to Google Forms ---------- */
   (function initOrderForm() {
   const form = document.getElementById('orderForm');
   if (!form) return;
   const status = document.getElementById('formStatus');
-  const TO = 'diidlify141@gmail.com';
+  const GOOGLE_FORM_ENDPOINT =
+  'https://docs.google.com/forms/d/e/1FAIpQLSflwmth9mCggQuqnxvMhsr56SZrx_PZ7uODVt1r4esMUdyN3g/formResponse';
+  const GOOGLE_FORM_FIELDS = {
+  name: 'entry.306210424',
+  email: 'entry.661132565',
+  phone: 'entry.909374708',
+  artwork_type: 'entry.1918541112',
+  reference: 'entry.132203125',
+  requirement: 'entry.854528001'
+  };
 
   form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
-  const name = (data.get('name') || '').toString().trim();
-  const email = (data.get('email') || '').toString().trim();
-  const phone = (data.get('phone') || '').toString().trim();
-  const type = (data.get('artwork_type') || '').toString().trim();
-  const ref = (data.get('reference') || '').toString().trim();
-  const req = (data.get('requirement') || '').toString().trim();
 
-  const subject = `Artwork Request - ${name || 'Diidlify Studio'}`;
-  const body =
-  `Hi Varsha,\n\n` +
-  `I'd like to place an artwork request.\n\n` +
-  `Name: ${name}\n` +
-  `Email: ${email}\n` +
-  `Phone / WhatsApp: ${phone || '-'}\n` +
-  `Artwork Type: ${type}\n` +
-  `Catalogue Reference: ${ref || '-'}\n\n` +
-  `Requirement:\n${req}\n\n` +
-  `Thanks!`;
+  // Google Forms does not allow cross-origin fetches, so submit to a hidden iframe.
+  const targetName = 'google-form-submit-frame';
+  let submitFrame = document.getElementById(targetName);
+  if (!submitFrame) {
+  submitFrame = document.createElement('iframe');
+  submitFrame.name = targetName;
+  submitFrame.id = targetName;
+  submitFrame.title = 'Form submission';
+  submitFrame.hidden = true;
+  document.body.appendChild(submitFrame);
+  }
 
-  const gmailUrl =
-  'https://mail.google.com/mail/?view=cm&fs=1' +
-  '&to=' + encodeURIComponent(TO) +
-  '&su=' + encodeURIComponent(subject) +
-  '&body=' + encodeURIComponent(body);
+  const googleForm = document.createElement('form');
+  googleForm.method = 'POST';
+  googleForm.action = GOOGLE_FORM_ENDPOINT;
+  googleForm.target = targetName;
+  googleForm.hidden = true;
 
-  window.open(gmailUrl, '_blank', 'noopener');
+  Object.entries(GOOGLE_FORM_FIELDS).forEach(([fieldName, entryName]) => {
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = entryName;
+  input.value = data.get(fieldName) || '';
+  googleForm.appendChild(input);
+  });
 
-  status.textContent =
-  'Gmail opened in a new tab with your details. Please review and click Send in Gmail to deliver your request.';
+  document.body.appendChild(googleForm);
+  googleForm.submit();
+  googleForm.remove();
+  form.reset();
+
+  status.textContent = 'Your requirement has been submitted successfully.';
   status.className = 'form-status success';
   });
   })();
