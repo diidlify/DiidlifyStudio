@@ -50,7 +50,7 @@ for(let i = 0; i < 40; i++){ const particle=document.createElement('span'); part
   //  Image modal: open on click of any gallery/panel image 
   const imageModal=document.getElementById('imageModal'); 
   const  modalImg=document.getElementById('modalImg'); const modalClose=document.getElementById('modalClose');
-  document.querySelectorAll('.panel, .gallery-card').forEach(card=> {
+  document.querySelectorAll('.panel, .gallery-card, .testimonial-card').forEach(card=> {
   const img = card.querySelector('img');
   if (!img) return;
   card.style.cursor = 'zoom-in';
